@@ -1,4 +1,4 @@
-package main.java.unlam.kingdomino;
+package main.java.unlam.kingdomino.logica;
 
 public class Posicion {
 	private int x;

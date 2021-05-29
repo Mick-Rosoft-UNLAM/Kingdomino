@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-import main.java.unlam.kingdomino.Ficha;
-import main.java.unlam.kingdomino.Jugador;
-import main.java.unlam.kingdomino.Partida;
-import main.java.unlam.kingdomino.Posicion;
-import main.java.unlam.kingdomino.Ronda;
+import main.java.unlam.kingdomino.logica.Ficha;
+import main.java.unlam.kingdomino.logica.Jugador;
+import main.java.unlam.kingdomino.logica.Partida;
+import main.java.unlam.kingdomino.logica.Posicion;
+import main.java.unlam.kingdomino.logica.Ronda;
 
 public class TestTablero {
 

@@ -1,4 +1,4 @@
-package main.java.unlam.kingdomino;
+package main.java.unlam.kingdomino.logica;
 
 import java.util.List;
 
