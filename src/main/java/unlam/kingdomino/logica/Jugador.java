@@ -33,4 +33,8 @@ public class Jugador {
 		Jugador.tablero.mostrarTablero();
 	}
 
+	public void setName(String apodo) {
+		this.apodo = apodo;
+	}
+
 }

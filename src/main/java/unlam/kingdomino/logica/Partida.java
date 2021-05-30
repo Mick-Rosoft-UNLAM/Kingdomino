@@ -89,4 +89,8 @@ public class Partida {
 	public void setMazo() {
 		
 	}
+	
+	public int getCantDeJugadores() {
+		return jugadores.size();
+	}
 }
