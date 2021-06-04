@@ -1,4 +1,4 @@
-package main.java.unlam.kingdomino.logica;
+package main.java.edu.unlam.taller.kingdomino.logica;
 
 public class Ficha {
 	private Bioma biomaIzq;

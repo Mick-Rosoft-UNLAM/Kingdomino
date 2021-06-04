@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import main.java.unlam.kingdomino.logica.Ficha;
-import main.java.unlam.kingdomino.logica.Jugador;
-import main.java.unlam.kingdomino.logica.Partida;
+import main.java.edu.unlam.taller.kingdomino.logica.Ficha;
+import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
+import main.java.edu.unlam.taller.kingdomino.logica.Partida;
 
 public class TestRonda {
 

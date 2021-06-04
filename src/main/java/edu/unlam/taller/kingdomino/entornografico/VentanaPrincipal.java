@@ -1,4 +1,4 @@
-package main.java.unlam.kingdomino.entornografico;
+package main.java.edu.unlam.taller.kingdomino.entornografico;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,7 +38,7 @@ public class VentanaPrincipal extends JPanel {
 	}
 
 	private JLabel setImagen() throws IOException {
-		BufferedImage imgKingDomino = ImageIO.read(new File("C://Users//Usuario//Desktop//pic3132685.png"));
+		BufferedImage imgKingDomino = ImageIO.read(new File(".//src//img//cover.png"));
 		JLabel lblImgKingDomino = new JLabel(new ImageIcon(imgKingDomino));
 		lblImgKingDomino.setHorizontalAlignment(SwingConstants.LEFT);
 		lblImgKingDomino.setBounds(0, 0, 300, 303);

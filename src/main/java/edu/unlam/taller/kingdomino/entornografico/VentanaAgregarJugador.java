@@ -1,8 +1,7 @@
-package main.java.unlam.kingdomino.entornografico;
+package main.java.edu.unlam.taller.kingdomino.entornografico;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.image.BufferedImage;
@@ -12,12 +11,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import main.java.unlam.kingdomino.logica.Jugador;
+import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
 
-import java.awt.BasicStroke;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -74,7 +71,7 @@ public class VentanaAgregarJugador extends JPanel {
 	}
 
 	private JLabel setImagen() throws IOException {
-		BufferedImage imgKingDomino = ImageIO.read(new File("C://Users//Usuario//Desktop//pic3132685.png"));
+		BufferedImage imgKingDomino = ImageIO.read(new File(".//src//img//cover.png"));
 		JLabel lblImgKingDomino = new JLabel(new ImageIcon(imgKingDomino));
 		lblImgKingDomino.setHorizontalAlignment(SwingConstants.LEFT);
 		lblImgKingDomino.setBounds(0, 0, 300, 303);

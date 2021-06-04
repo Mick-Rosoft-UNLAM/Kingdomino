@@ -1,4 +1,4 @@
-package main.java.unlam.kingdomino.entornografico;
+package main.java.edu.unlam.taller.kingdomino.entornografico;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -7,8 +7,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.java.unlam.kingdomino.logica.Jugador;
-import main.java.unlam.kingdomino.logica.Partida;
+import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
 
 public class App {
 	private CardLayout cardLayout = new CardLayout(0, 0);

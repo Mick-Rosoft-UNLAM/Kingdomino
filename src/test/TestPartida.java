@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import main.java.unlam.kingdomino.logica.Jugador;
-import main.java.unlam.kingdomino.logica.Partida;
+import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
+import main.java.edu.unlam.taller.kingdomino.logica.Partida;
 
 
 public class TestPartida {
