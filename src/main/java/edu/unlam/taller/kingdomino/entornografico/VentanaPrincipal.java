@@ -27,13 +27,12 @@ public class VentanaPrincipal extends JPanel {
 	private JButton setBotonInicio(CardLayout cardLayout, JPanel panelContainer) {
 		JButton botonInicio = new JButton("Jugar");
 		botonInicio.setLocation(365, 141);
+		botonInicio.setSize(70, 20);
 		botonInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(panelContainer, "2");
 			}
 		});
-		
-		botonInicio.setSize(70, 20);
 		return botonInicio;
 	}
 

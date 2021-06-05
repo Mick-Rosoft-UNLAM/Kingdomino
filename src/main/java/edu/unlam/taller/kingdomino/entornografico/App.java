@@ -16,19 +16,19 @@ public class App {
 	Jugador jugador = new Jugador(null);
 	
 	public App() throws IOException {
-		init();
-		setComponentes();
-		frame.add(panelContainer);
-		frame.pack();
-		frame.setVisible(true);
+		initFrame();	
+	}
+	
+	public static void main(String[] args) throws IOException {
+		new App();
 	}
 
-	private void setComponentes() throws IOException {
+	private void addComponentes() throws IOException {
 		panelContainer.add(new VentanaPrincipal(cardLayout, panelContainer), "1");
 		panelContainer.add(new VentanaAgregarJugador(cardLayout, panelContainer, jugador), "2");
 	}
 
-	private void init() {
+	private void initFrame() throws IOException {
 		panelContainer.setLayout(cardLayout);
 		frame.setTitle("Kindomino");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,9 +36,9 @@ public class App {
 		frame.setSize(500, 303);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-	}
-	
-	public static void main(String[] args) throws IOException {
-		new App();
+		addComponentes();
+		frame.add(panelContainer);
+		frame.pack();
+		frame.setVisible(true);
 	}
 }
