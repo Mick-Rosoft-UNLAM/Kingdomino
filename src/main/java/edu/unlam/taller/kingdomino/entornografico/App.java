@@ -27,6 +27,8 @@ public class App {
 		panelContainer.add(new VentanaPrincipal(cardLayout, panelContainer), "1");
 		panelContainer.add(new VentanaAgregarJugador(panelContainer, jugador), "2");
 		panelContainer.add(new VentanaPartida(), "3");
+		panelContainer.add(new VentanaCrearPartida(panelContainer, jugador), "4");
+		panelContainer.add(new VentanaUnirse(panelContainer, jugador), "5");
 	}
 
 	private void initFrame() throws IOException {

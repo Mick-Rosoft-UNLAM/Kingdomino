@@ -31,71 +31,53 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class VentanaAgregarJugador extends JPanel {
-	private static final long serialVersionUID = -2190704995900735227L;
+public class VentanaCrearPartida extends JPanel {
+	private static final long serialVersionUID = -4994895651039084347L;
 	JTextField textFieldUser;
+	private JTextField textField;
 
-	public VentanaAgregarJugador(JPanel panelContainer, Jugador jugador) throws IOException {
+	public VentanaCrearPartida(JPanel panelContainer, Jugador jugador) throws IOException {
 		setLayout(null);
 		setSize(500, 303);
 		add(setIgresarJugadorLabel());
 		add(setImagen());
 		add(setTextFieldUser());
-		add(setJButtonUnirse(jugador, panelContainer));
-		add(setJButtonCrearPartida(jugador, panelContainer));
+		add(setJButtonJugar(jugador));
+		add(setJugadoresLabel());
+		
+		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setEnabled(false);
+		textField.setEditable(false);
+		textField.setColumns(10);
+		textField.setBounds(345, 109, 117, 99);
+		add(textField);
 	}
 
-	private JButton setJButtonCrearPartida(Jugador jugador, JPanel panelContainer) {
-		JButton btnCrearPartida = new JButton("Crear Partida");
-		
-		btnCrearPartida.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(nombreDeUsuarioValido()) {
-					jugador.setName(textFieldUser.getText());
-					//cambiarDimensionJFrame(panelContainer);
-					((CardLayout) panelContainer.getLayout()).show(panelContainer, "4");;
-				} else {					
-					textFieldUser.setBorder(new LineBorder(Color.RED));
-					JOptionPane.showMessageDialog(null, "El nombre de usuario es inválido.");
-				}
-			}
+	private JLabel setJugadoresLabel() {
+		JLabel lblJugadores = new JLabel("Jugadores:");
+		lblJugadores.setHorizontalAlignment(SwingConstants.CENTER);
+		lblJugadores.setBounds(350, 85, 110, 14);
+		return lblJugadores;
+	}
 
-			private void cambiarDimensionJFrame(JPanel panelContainer) {
-				JFrame jf = (JFrame) SwingUtilities.getWindowAncestor(panelContainer);
-				jf.getContentPane().setPreferredSize(new Dimension(1230, 600));
-				jf.setSize(new Dimension(1230, 600));
-				jf.setLocationRelativeTo(null);
-				jf.pack();
+	private JButton setJButtonJugar(Jugador jugador) {
+		JButton btnJugar = new JButton("JUGAR");
+		btnJugar.setBounds(338, 233, 128, 30);
+		
+		btnJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		
-		btnCrearPartida.setBounds(338, 110, 128, 30);
-		return btnCrearPartida;
-	}
-
-	private JButton setJButtonUnirse(Jugador jugador, JPanel panelContainer) {
-		JButton btnUnirse = new JButton("Unirse a Partida");
-		btnUnirse.setBounds(339, 183, 128, 30);
-		
-		btnUnirse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(nombreDeUsuarioValido()) {
-					jugador.setName(textFieldUser.getText());
-					((CardLayout) panelContainer.getLayout()).show(panelContainer, "5");;
-				} else {					
-					textFieldUser.setBorder(new LineBorder(Color.RED));
-					JOptionPane.showMessageDialog(null, "El nombre de usuario es inválido.");
-				}
-			}
-
-			
-		});
-		
-		return btnUnirse;
+		return btnJugar;
 	}
 
 	private JTextField setTextFieldUser() {
 		textFieldUser = new JTextField();
+		textFieldUser.setEnabled(false);
+		textFieldUser.setEditable(false);
 		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUser.setBounds(345, 48, 117, 20);
 		textFieldUser.setColumns(10);
@@ -131,7 +113,7 @@ public class VentanaAgregarJugador extends JPanel {
 	}
 
 	private JLabel setIgresarJugadorLabel() {
-		JLabel lblIngresarJugador = new JLabel("Ingresar usuario:");
+		JLabel lblIngresarJugador = new JLabel("C\u00F3digo:");
 		lblIngresarJugador.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIngresarJugador.setBounds(350, 23, 110, 14);
 		return lblIngresarJugador;
@@ -143,9 +125,5 @@ public class VentanaAgregarJugador extends JPanel {
 		lblImgKingDomino.setHorizontalAlignment(SwingConstants.LEFT);
 		lblImgKingDomino.setBounds(0, 0, 300, 303);
 		return lblImgKingDomino;
-	}
-	
-	private boolean nombreDeUsuarioValido() {
-		return !textFieldUser.getText().equals("") && textFieldUser.getText().length() < 8;
 	}
 }
