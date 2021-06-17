@@ -78,6 +78,8 @@ public class Tablero {
 		return 0;
 	}
 	
+	
+	
 	public void mostrarTablero() {
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
@@ -86,4 +88,13 @@ public class Tablero {
 			System.out.println();
 		}
 	}
+	
+
+	public String obtenerBioma(Posicion pos, Tablero tab) {
+		Bioma bioma;
+		bioma = tab.tablero[pos.getX()][pos.getY()];
+		return bioma.toString();
+		 
+	}
 }
+	
