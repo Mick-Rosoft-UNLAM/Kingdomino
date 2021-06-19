@@ -12,78 +12,73 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import main.java.edu.unlam.taller.kingdomino.client.Cliente;
 import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class VentanaAgregarJugador extends JPanel {
 	private static final long serialVersionUID = -2190704995900735227L;
-	JTextField textFieldUser;
+	JTextField txtFldUsuario;
+	JButton btnCrearPartida;
+	JButton btnUnirse;
+	JLabel lblIngresarJugador;
+	JLabel lblImgKD;
 
-	public VentanaAgregarJugador(JPanel panelContainer, Jugador jugador) throws IOException {
+	public VentanaAgregarJugador(JPanel panelContainer, Jugador jugador, Cliente cliente) throws IOException {
 		setLayout(null);
 		setSize(500, 303);
-		add(setIgresarJugadorLabel());
-		add(setImagen());
-		add(setTextFieldUser());
-		add(setJButtonUnirse(jugador, panelContainer));
-		add(setJButtonCrearPartida(jugador, panelContainer));
+		add(initLblIgresarJugador());
+		add(cargarImagenKD());
+		add(initTxtFldUsuario());
+		add(initBtnUnirse(jugador, panelContainer));
+		add(initBtnCrearPartida(jugador, panelContainer, cliente));
 	}
 
-	private JButton setJButtonCrearPartida(Jugador jugador, JPanel panelContainer) {
-		JButton btnCrearPartida = new JButton("Crear Partida");
+	private JButton initBtnCrearPartida(Jugador jugador, JPanel panelContainer, Cliente cliente) {
+		btnCrearPartida = new JButton("Crear/Unirse");
+		btnCrearPartida.setBounds(338, 110, 128, 30);
 		
 		btnCrearPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(nombreDeUsuarioValido()) {
-					jugador.setName(textFieldUser.getText());
-					//cambiarDimensionJFrame(panelContainer);
-					((CardLayout) panelContainer.getLayout()).show(panelContainer, "4");;
+					jugador.setName(txtFldUsuario.getText());
+					cliente.startClient();
+					cliente.agregarJugador(jugador.getName());
+					((CardLayout) panelContainer.getLayout()).show(panelContainer, "4");
+					
 				} else {					
-					textFieldUser.setBorder(new LineBorder(Color.RED));
+					txtFldUsuario.setBorder(new LineBorder(Color.RED));
 					JOptionPane.showMessageDialog(null, "El nombre de usuario es inválido.");
 				}
 			}
-
-			private void cambiarDimensionJFrame(JPanel panelContainer) {
-				JFrame jf = (JFrame) SwingUtilities.getWindowAncestor(panelContainer);
-				jf.getContentPane().setPreferredSize(new Dimension(1230, 600));
-				jf.setSize(new Dimension(1230, 600));
-				jf.setLocationRelativeTo(null);
-				jf.pack();
-			}
 		});
 		
-		btnCrearPartida.setBounds(338, 110, 128, 30);
 		return btnCrearPartida;
 	}
 
-	private JButton setJButtonUnirse(Jugador jugador, JPanel panelContainer) {
-		JButton btnUnirse = new JButton("Unirse a Partida");
+	private JButton initBtnUnirse(Jugador jugador, JPanel panelContainer) {
+		btnUnirse = new JButton("Unirse a Partida");
 		btnUnirse.setBounds(339, 183, 128, 30);
+		btnUnirse.setEnabled(false);
 		
 		btnUnirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(nombreDeUsuarioValido()) {
-					jugador.setName(textFieldUser.getText());
+					jugador.setName(txtFldUsuario.getText());
 					((CardLayout) panelContainer.getLayout()).show(panelContainer, "5");;
 				} else {					
-					textFieldUser.setBorder(new LineBorder(Color.RED));
+					txtFldUsuario.setBorder(new LineBorder(Color.RED));
 					JOptionPane.showMessageDialog(null, "El nombre de usuario es inválido.");
 				}
 			}
@@ -94,24 +89,23 @@ public class VentanaAgregarJugador extends JPanel {
 		return btnUnirse;
 	}
 
-	private JTextField setTextFieldUser() {
-		textFieldUser = new JTextField();
-		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldUser.setBounds(345, 48, 117, 20);
-		textFieldUser.setColumns(10);
+	private JTextField initTxtFldUsuario() {
+		txtFldUsuario = new JTextField();
+		txtFldUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		txtFldUsuario.setBounds(345, 48, 117, 20);
+		txtFldUsuario.setColumns(10);
+		txtFldUsuario.setBorder(new LineBorder(Color.RED));
 
-		textFieldUser.getDocument().addDocumentListener(new DocumentListener() {
+		txtFldUsuario.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				validarNombreDeUsuario();
-
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				validarNombreDeUsuario();
-
 			}
 
 			@Override
@@ -119,33 +113,34 @@ public class VentanaAgregarJugador extends JPanel {
 			}
 			
 			public void validarNombreDeUsuario() {
-				if(!textFieldUser.getText().equals("") && textFieldUser.getText().length() < 8) {
-					textFieldUser.setBorder(new LineBorder(Color.GREEN));
+				if(!txtFldUsuario.getText().equals("") && txtFldUsuario.getText().length() < 8) {
+					txtFldUsuario.setBorder(new LineBorder(Color.GREEN));
 				} else {
-					textFieldUser.setBorder(new LineBorder(Color.RED));
+					txtFldUsuario.setBorder(new LineBorder(Color.RED));
 				}
 			}
 
 		});
-		return textFieldUser;
+		
+		return txtFldUsuario;
 	}
 
-	private JLabel setIgresarJugadorLabel() {
-		JLabel lblIngresarJugador = new JLabel("Ingresar usuario:");
+	private JLabel initLblIgresarJugador() {
+		lblIngresarJugador = new JLabel("Ingresar usuario:");
 		lblIngresarJugador.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIngresarJugador.setBounds(350, 23, 110, 14);
 		return lblIngresarJugador;
 	}
 
-	private JLabel setImagen() throws IOException {
-		BufferedImage imgKingDomino = ImageIO.read(new File(".//src//img//cover.png"));
-		JLabel lblImgKingDomino = new JLabel(new ImageIcon(imgKingDomino));
-		lblImgKingDomino.setHorizontalAlignment(SwingConstants.LEFT);
-		lblImgKingDomino.setBounds(0, 0, 300, 303);
-		return lblImgKingDomino;
+	private JLabel cargarImagenKD() throws IOException {
+		BufferedImage imgKDBuff = ImageIO.read(new File(".//src//img//cover.png"));
+		lblImgKD = new JLabel(new ImageIcon(imgKDBuff));
+		lblImgKD.setHorizontalAlignment(SwingConstants.LEFT);
+		lblImgKD.setBounds(0, 0, 300, 303);
+		return lblImgKD;
 	}
 	
 	private boolean nombreDeUsuarioValido() {
-		return !textFieldUser.getText().equals("") && textFieldUser.getText().length() < 8;
+		return !txtFldUsuario.getText().equals("") && txtFldUsuario.getText().length() < 8;
 	}
 }

@@ -37,4 +37,8 @@ public class Jugador {
 		this.apodo = apodo;
 	}
 
+	public String getName() {
+		return apodo;
+	}
+
 }

@@ -14,7 +14,7 @@ public class VentanaPartida extends JPanel{
 		setPreferredSize(new Dimension(1230, 600));
 		setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 		setLayout(new GridLayout(1, 2, 50, 0));
-		add(new TableroView());
-		add(new TableroView());
+		add(new ComponenteTablero());
+		add(new ComponenteTablero());
 	}
 }

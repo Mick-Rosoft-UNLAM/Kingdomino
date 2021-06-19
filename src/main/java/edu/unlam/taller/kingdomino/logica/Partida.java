@@ -93,4 +93,8 @@ public class Partida {
 	public int getCantDeJugadores() {
 		return jugadores.size();
 	}
+
+	public void eliminarJugador(String nombreJugador) {
+		jugadores.removeIf(jugador -> jugador.getName().equals(nombreJugador));
+	}
 }

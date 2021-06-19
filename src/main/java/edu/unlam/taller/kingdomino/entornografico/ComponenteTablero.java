@@ -17,11 +17,11 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
-public class TableroView extends JPanel {
+public class ComponenteTablero extends JPanel {
 	private static final long serialVersionUID = -574870386935501776L;
 	JButton[][] tablero = new JButton[9][9];
 
-	public TableroView() throws IOException {
+	public ComponenteTablero() throws IOException {
 		setBackground(Color.BLACK);
 		setLayout(new GridLayout(9, 9));
 		setSize(new Dimension(540, 540));

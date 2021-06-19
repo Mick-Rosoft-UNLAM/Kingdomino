@@ -2,7 +2,7 @@ package main.java.edu.unlam.taller.kingdomino.entornografico;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import java.awt.image.BufferedImage;
@@ -10,48 +10,57 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractListModel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
+import main.java.edu.unlam.taller.kingdomino.client.Cliente;
 import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
+import javax.swing.border.EtchedBorder;
 
 public class VentanaCrearPartida extends JPanel {
 	private static final long serialVersionUID = -4994895651039084347L;
 	JTextField textFieldUser;
-	private JTextField textField;
+	JList<String> list;
 
-	public VentanaCrearPartida(JPanel panelContainer, Jugador jugador) throws IOException {
+	public void setJugadores(String jugadores) {
+		list.setModel(new AbstractListModel<String>() {
+			private static final long serialVersionUID = -1100482181954703866L;
+			String[] values = jugadores.split(",");
+			public int getSize() {
+				return values.length;
+			}
+			public String getElementAt(int index) {
+				return values[index];
+			}
+		});
+	}
+
+	public VentanaCrearPartida(JPanel panelContainer, Jugador jugador, Cliente cliente) throws IOException {
 		setLayout(null);
 		setSize(500, 303);
 		add(setIgresarJugadorLabel());
 		add(setImagen());
 		add(setTextFieldUser());
-		add(setJButtonJugar(jugador));
+		add(setJButtonJugar(jugador, panelContainer, cliente));
 		add(setJugadoresLabel());
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setEnabled(false);
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(345, 109, 117, 99);
-		add(textField);
+		
+		list = new JList<String>();
+		list.setBounds(338, 110, 128, 108);
+		list.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		list.setPreferredSize(new Dimension(120, 140));
+		add(list);
+		
 	}
 
 	private JLabel setJugadoresLabel() {
@@ -61,13 +70,13 @@ public class VentanaCrearPartida extends JPanel {
 		return lblJugadores;
 	}
 
-	private JButton setJButtonJugar(Jugador jugador) {
+	private JButton setJButtonJugar(Jugador jugador, JPanel panelContainer, Cliente cliente) {
 		JButton btnJugar = new JButton("JUGAR");
 		btnJugar.setBounds(338, 233, 128, 30);
 		
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				cliente.iniciarPartida();
 			}
 		});
 		
@@ -81,34 +90,6 @@ public class VentanaCrearPartida extends JPanel {
 		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUser.setBounds(345, 48, 117, 20);
 		textFieldUser.setColumns(10);
-
-		textFieldUser.getDocument().addDocumentListener(new DocumentListener() {
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validarNombreDeUsuario();
-
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validarNombreDeUsuario();
-
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-			}
-			
-			public void validarNombreDeUsuario() {
-				if(!textFieldUser.getText().equals("") && textFieldUser.getText().length() < 8) {
-					textFieldUser.setBorder(new LineBorder(Color.GREEN));
-				} else {
-					textFieldUser.setBorder(new LineBorder(Color.RED));
-				}
-			}
-
-		});
 		return textFieldUser;
 	}
 
