@@ -36,20 +36,21 @@ public class ComponenteTablero extends JPanel {
 				JButton temp = new JButton();
 				temp.setPreferredSize(new Dimension(60, 60));
 				temp.setBackground(new Color(Color.TRANSLUCENT));
-				temp.setIcon(new ImageIcon(img));
-				temp.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						temp.setIcon(new ImageIcon(imgCircCruz));
-					}
-				});
+				temp.setText(i + ", " + j);
+				//temp.setIcon(new ImageIcon(img));
+//				temp.addMouseListener(new MouseAdapter() {
+//					@Override
+//					public void mouseEntered(MouseEvent e) {
+//						temp.setIcon(new ImageIcon(imgCircCruz));
+//					}
+//				});
 
-				temp.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseExited(MouseEvent e) {
-						temp.setBackground(new Color(Color.TRANSLUCENT));
-					}
-				});
+//				temp.addMouseListener(new MouseAdapter() {
+//					@Override
+//					public void mouseExited(MouseEvent e) {
+//						temp.setBackground(new Color(Color.TRANSLUCENT));
+//					}
+//				});
 				add(temp);
 			}
 		}

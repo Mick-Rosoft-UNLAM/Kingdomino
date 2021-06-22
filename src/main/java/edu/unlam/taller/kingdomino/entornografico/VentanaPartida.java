@@ -15,6 +15,6 @@ public class VentanaPartida extends JPanel{
 		setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 		setLayout(new GridLayout(1, 2, 50, 0));
 		add(new ComponenteTablero());
-		add(new ComponenteTablero());
+		add(new ComponenteRonda());
 	}
 }
