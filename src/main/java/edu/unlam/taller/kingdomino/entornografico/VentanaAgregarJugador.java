@@ -54,9 +54,7 @@ public class VentanaAgregarJugador extends JPanel {
 				if(nombreDeUsuarioValido()) {
 					jugador.setName(txtFldUsuario.getText());
 					cliente.startClient();
-					cliente.agregarJugador(jugador.getName());
-					((CardLayout) panelContainer.getLayout()).show(panelContainer, "4");
-					
+					cliente.agregarJugador(jugador.getName());					
 				} else {					
 					txtFldUsuario.setBorder(new LineBorder(Color.RED));
 					JOptionPane.showMessageDialog(null, "El nombre de usuario es inválido.");

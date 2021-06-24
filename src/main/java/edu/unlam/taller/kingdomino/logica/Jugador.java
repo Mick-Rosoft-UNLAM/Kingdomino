@@ -1,8 +1,11 @@
 package main.java.edu.unlam.taller.kingdomino.logica;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Jugador {
+public class Jugador implements Serializable{
+
+	private static final long serialVersionUID = -8672140927927732000L;
 	private Ficha fichaActual;
 	private Tablero tablero;
 	private String apodo;

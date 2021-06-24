@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import main.java.edu.unlam.taller.kingdomino.client.Cliente;
 import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
+import main.java.edu.unlam.taller.kingdomino.logica.Ronda;
 
 public class App {
 	private CardLayout cardLayout = new CardLayout(0, 0);
@@ -81,8 +82,9 @@ public class App {
 		    			cliente.eliminarJugador(jugador.getName());		        		
 		    			System.exit(0);
 		    		}
+		    	} else {		    		
+		    		System.exit(0);
 		    	}
-		    	System.exit(0);
 		    }
 		};
 		frame.addWindowListener(exitListener);
@@ -90,12 +92,14 @@ public class App {
 	
 
 	public void setJugadores(String jugadores) {
+
 		ventanaCrearPartida.setJugadores(jugadores);
 	}
 
-	public void iniciarPartida() {
+	public void iniciarPartida(Ronda ronda) throws IOException {
 		cambiarDimensionFrame(new Dimension(1230, 600));
 		cardLayout.show(panelContainer, "3");
+		ventanaPartida.initRonda(ronda);
 	}
 	
 	private void cambiarDimensionFrame(Dimension dimension) {
@@ -107,5 +111,13 @@ public class App {
 
 	public void mostrarMensajeJugadoresNotOk() {
 		JOptionPane.showMessageDialog(null, "No se puede iniciar la partida. La cantidad de jugadores es incorrecta.");
+	}
+
+	public void mostrarMensajePartidaYaIniciada() {
+		JOptionPane.showMessageDialog(null, "No se puede ingresar a una partida ya iniciada.");
+	}
+
+	public void mostrarVentanaCrearPartida() {
+		cardLayout.show(panelContainer, "4");
 	}
 }

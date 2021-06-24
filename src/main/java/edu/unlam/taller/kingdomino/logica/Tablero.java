@@ -1,7 +1,10 @@
 package main.java.edu.unlam.taller.kingdomino.logica;
 
-public class Tablero {
+import java.io.Serializable;
 
+public class Tablero implements Serializable {
+
+	private static final long serialVersionUID = 2384899891065337487L;
 	private Bioma[][] tablero;
 	
 	public Tablero() {

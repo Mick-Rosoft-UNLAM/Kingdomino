@@ -57,8 +57,8 @@ public class Servidor {
         }
     }
 
-	public void agregarJugador(Jugador jugador) {
-		partida.agregarJugador(jugador);
+	public boolean agregarJugador(Jugador jugador) {
+		return partida.agregarJugador(jugador);
 	}
 
 	public String getJugadores() {
@@ -71,5 +71,13 @@ public class Servidor {
 
 	public Partida getPartida() {
 		return partida;
+	}
+
+	public int getCantidadDeJugadores() {
+		return partida.getCantDeJugadores();
+	}
+
+	public Object iniciarPartida() {
+		return partida.iniciarPartida();
 	}
 }

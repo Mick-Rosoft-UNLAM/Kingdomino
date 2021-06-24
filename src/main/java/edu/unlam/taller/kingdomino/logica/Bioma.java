@@ -1,11 +1,12 @@
 package main.java.edu.unlam.taller.kingdomino.logica;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public enum Bioma {
+public enum Bioma implements Serializable{
 	BOSQUE,
 	MONTAÑA,
 	LAGO,

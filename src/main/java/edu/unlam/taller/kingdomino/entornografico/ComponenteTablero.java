@@ -19,8 +19,7 @@ import java.io.IOException;
 
 public class ComponenteTablero extends JPanel {
 	private static final long serialVersionUID = -574870386935501776L;
-	JButton[][] tablero = new JButton[9][9];
-
+	
 	public ComponenteTablero() throws IOException {
 		setBackground(Color.BLACK);
 		setLayout(new GridLayout(9, 9));
@@ -30,7 +29,6 @@ public class ComponenteTablero extends JPanel {
 
 	public void createButtonPanel() throws IOException {
 		Image img = ImageIO.read(new File(".//src//img//circ.png"));
-		Image imgCircCruz = ImageIO.read(new File(".//src//img//circ_cruzado.png"));
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				JButton temp = new JButton();

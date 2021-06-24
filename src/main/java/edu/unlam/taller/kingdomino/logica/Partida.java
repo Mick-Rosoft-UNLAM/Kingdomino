@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Partida {
+	private boolean iniciada = false;
 	private List<Ficha> mazo;
 	private List<Jugador> jugadores;
 	private boolean primerRonda = true;
@@ -14,16 +15,14 @@ public class Partida {
 		this.jugadores = new ArrayList<>();
 	}
 	
-	public void iniciarPartida() {
+	public Object iniciarPartida() {
 		if(cantJugadoresOk()) {
+			iniciada = true;
 			generarMazo();
-			while(!mazo.isEmpty()) {
-				ordenarJugadores();
-				Ronda.nuevaRonda(jugadores, getFichasParaTurno());
-			}
-			finalizarPartida();
+			ordenarJugadores();
+			return Ronda.nuevaRonda(jugadores, getFichasParaTurno());
 		} else
-			System.out.println("Cantidad de jugadores no valida.");
+			return "NIP";
 	}
 	
 	public void ordenarJugadores() {
@@ -41,10 +40,12 @@ public class Partida {
 		return jugadores.size() >= 2 && jugadores.size() <= 4;
 	}
 
-	public void agregarJugador(Jugador jugador) {
-		if(jugadores.size() < 4) {
+	public boolean agregarJugador(Jugador jugador) {
+		if(jugadores.size() < 4 && !iniciada) {
 			jugadores.add(jugador);
+			return true;
 		}
+		return false;
 	}
 
 	private void finalizarPartida() {
@@ -96,5 +97,17 @@ public class Partida {
 
 	public void eliminarJugador(String nombreJugador) {
 		jugadores.removeIf(jugador -> jugador.getName().equals(nombreJugador));
+	}
+
+	public Ronda nuevaRonda() {
+		return Ronda.nuevaRonda(jugadores, getFichasParaTurno());
+	}
+
+	public boolean isIniciada() {
+		return iniciada;
+	}
+
+	public void setIniciada(boolean iniciada) {
+		this.iniciada = iniciada;
 	}
 }

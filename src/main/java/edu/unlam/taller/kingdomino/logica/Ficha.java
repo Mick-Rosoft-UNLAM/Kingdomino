@@ -1,6 +1,8 @@
 package main.java.edu.unlam.taller.kingdomino.logica;
 
-public class Ficha {
+import java.io.Serializable;
+
+public class Ficha implements Serializable{
 	private Bioma biomaIzq;
 	private Bioma biomaDer;
 	private Integer nro;
@@ -21,5 +23,10 @@ public class Ficha {
 
 	public Integer getNro() {
 		return nro;
+	}
+	
+	@Override
+	public String toString() {
+		return nro + ", " + biomaIzq + ", " + biomaDer;
 	}
 }
