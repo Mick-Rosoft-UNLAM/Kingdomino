@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Tablero implements Serializable {
 
 	private static final long serialVersionUID = 2384899891065337487L;
-	private Bioma[][] tablero;
+	private FichaBioma[][] tablero;
 	
 	public Tablero() {
-		tablero = new Bioma[9][9];
-		tablero[4][4] = Bioma.CASTILLO;
+		tablero = new FichaBioma[9][9];
+		tablero[4][4] = FichaBioma.tablero();
 	}
 	
 	public void colocarFicha(Ficha ficha, Posicion posBiomaIzq, Posicion posBiomaDer) {
@@ -94,7 +94,7 @@ public class Tablero implements Serializable {
 	
 
 	public String obtenerBioma(Posicion pos, Tablero tab) {
-		Bioma bioma;
+		FichaBioma bioma;
 		bioma = tab.tablero[pos.getX()][pos.getY()];
 		return bioma.toString();
 		 

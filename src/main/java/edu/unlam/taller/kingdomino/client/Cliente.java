@@ -52,4 +52,8 @@ public class Cliente {
 	public void setSocketConectado(boolean socketConectado) {
 		this.socketConectado = socketConectado;
 	}
+
+	public void elegirRey(String string) {
+
+	}
 }

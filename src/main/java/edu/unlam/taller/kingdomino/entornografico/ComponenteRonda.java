@@ -2,26 +2,21 @@ package main.java.edu.unlam.taller.kingdomino.entornografico;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.io.File;
+
 import java.io.IOException;
 
 import javax.swing.JPanel;
-
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
-import main.java.edu.unlam.taller.kingdomino.logica.Ficha;
 import main.java.edu.unlam.taller.kingdomino.logica.Ronda;
 import main.java.edu.unlam.taller.kingdomino.utils.CargadorImg;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ComponenteRonda extends JPanel {
 
@@ -33,15 +28,16 @@ public class ComponenteRonda extends JPanel {
 	private JPanel panel_1; 
 	private JPanel panelRonda;
 	private CargadorImg cargadorImg;
+	private Timer timer;
 
 	public ComponenteRonda() throws IOException {
 		setBackground(Color.LIGHT_GRAY);
 		setSize(new Dimension(540, 540));
 		setLayout(null);
-		cargadorImg = new CargadorImg();
-	
+		cargadorImg = CargadorImg.getInstance();
 		
 		panelRonda = new JPanel();
+
 		panelRonda.setBackground(Color.LIGHT_GRAY);
 		panelRonda.setBounds(275, 34, 227, 320);
 		add(panelRonda);
@@ -82,11 +78,26 @@ public class ComponenteRonda extends JPanel {
 		JLabel lblIngresarPosicion = new JLabel("Ingresar posici\u00F3n ficha:");
 		lblIngresarPosicion.setBounds(20, 23, 141, 21);
 		panel_1.add(lblIngresarPosicion);
+		
+		timer = new Timer(1, event -> {
+			panelRonda.setBounds(panelRonda.getX() - 5, 34, panelRonda.getWidth(), panelRonda.getHeight());
+            if (panelRonda.getX() < 34) {
+                timer.stop();
+            }
+        });
+        timer.setInitialDelay(0);
 	}
 
 	public void initRonda(Ronda ronda) throws IOException {
 		panelRonda.setBounds(275, 34, 86 * 2, (86 * ronda.getCantidadDeJugadores()) + (20 * (ronda.getCantidadDeJugadores() - 1)));
 		panelRonda.setLayout(new GridLayout(ronda.getCantidadDeJugadores(), 2, 0, 20));
+		
+		panelRonda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				timer.start();
+			}
+		});
 		
 		String[] imgFichas = ronda.getFichas().replaceAll("[\\[+\\]+\\ ]", "").split(",");
 		for (int i = 0; i < ronda.getCantidadDeJugadores(); i++) {

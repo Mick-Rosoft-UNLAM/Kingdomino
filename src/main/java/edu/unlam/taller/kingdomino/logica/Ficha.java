@@ -6,27 +6,23 @@ import java.util.Random;
 public class Ficha implements Serializable{
 	private static final long serialVersionUID = -3103441741302596497L;
 	
-	private Bioma biomaIzq;
-	private Bioma biomaDer;
+	private FichaBioma biomaIzq;
+	private FichaBioma biomaDer;
 	
-	private int cantCoronasIzq;
-	private int cantCoronasDer;
 	
 	private Integer nro;
 	
 	public Ficha(Integer nro) {
 		this.nro = nro;
-		this.biomaIzq = Bioma.randomBioma();
-		this.biomaDer = Bioma.randomBioma();
-		this.cantCoronasIzq = new Random().nextInt(3);
-		this.cantCoronasDer = new Random().nextInt(3);
+		this.biomaIzq = new FichaBioma();
+		this.biomaDer = new FichaBioma();
 	}
 
-	public Bioma getBiomaDer() {
+	public FichaBioma getBiomaDer() {
 		return biomaDer;
 	}
 
-	public Bioma getBiomaIzq() {
+	public FichaBioma getBiomaIzq() {
 		return biomaIzq;
 	}
 
@@ -36,6 +32,6 @@ public class Ficha implements Serializable{
 	
 	@Override
 	public String toString() {
-		return biomaIzq + "-" + cantCoronasIzq + "_" + biomaDer + "-" + cantCoronasDer;
+		return biomaIzq  + "_" + biomaDer;
 	}
 }

@@ -18,14 +18,18 @@ import javax.swing.event.DocumentListener;
 
 import main.java.edu.unlam.taller.kingdomino.client.Cliente;
 import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
+import main.java.edu.unlam.taller.kingdomino.utils.CargadorImg;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Image;
 
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VentanaAgregarJugador extends JPanel {
 	private static final long serialVersionUID = -2190704995900735227L;
@@ -34,8 +38,11 @@ public class VentanaAgregarJugador extends JPanel {
 	JButton btnUnirse;
 	JLabel lblIngresarJugador;
 	JLabel lblImgKD;
+	private CargadorImg cargadorImg;
 
 	public VentanaAgregarJugador(JPanel panelContainer, Jugador jugador, Cliente cliente) throws IOException {
+		cargadorImg = CargadorImg.getInstance();
+		
 		setLayout(null);
 		setSize(500, 303);
 		add(initLblIgresarJugador());
@@ -43,6 +50,37 @@ public class VentanaAgregarJugador extends JPanel {
 		add(initTxtFldUsuario());
 		add(initBtnUnirse(jugador, panelContainer));
 		add(initBtnCrearPartida(jugador, panelContainer, cliente));
+		
+		JButton btnReyRojo = new JButton("");
+		btnReyRojo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cliente.elegirRey("ROJO");
+			}
+		});
+		btnReyRojo.setBounds(337, 251, 25, 25);
+		btnReyRojo.setIcon(new ImageIcon(cargadorImg.getImg("ROJO").getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		add(btnReyRojo);
+		
+		JButton btnReyAzul = new JButton("");
+		btnReyAzul.setBounds(371, 251, 25, 25);
+		btnReyAzul.setIcon(new ImageIcon(cargadorImg.getImg("AZUL").getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		add(btnReyAzul);
+		
+		JButton btnReyAmarillo = new JButton("");
+		btnReyAmarillo.setBounds(439, 251, 25, 25);
+		btnReyAmarillo.setIcon(new ImageIcon(cargadorImg.getImg("AMARILLO").getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		add(btnReyAmarillo);
+		
+		JButton btnReyVerde = new JButton("");
+		btnReyVerde.setBounds(405, 251, 25, 25);
+		btnReyVerde.setIcon(new ImageIcon(cargadorImg.getImg("VERDE").getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		add(btnReyVerde);
+		
+		JLabel lblElegirRey = new JLabel("Elegir Rey:");
+		lblElegirRey.setHorizontalAlignment(SwingConstants.CENTER);
+		lblElegirRey.setBounds(347, 229, 110, 14);
+		add(lblElegirRey);
 	}
 
 	private JButton initBtnCrearPartida(Jugador jugador, JPanel panelContainer, Cliente cliente) {
@@ -80,8 +118,6 @@ public class VentanaAgregarJugador extends JPanel {
 					JOptionPane.showMessageDialog(null, "El nombre de usuario es inválido.");
 				}
 			}
-
-			
 		});
 		
 		return btnUnirse;

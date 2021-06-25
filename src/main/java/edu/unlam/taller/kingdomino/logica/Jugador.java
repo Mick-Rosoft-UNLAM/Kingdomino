@@ -9,6 +9,7 @@ public class Jugador implements Serializable{
 	private Ficha fichaActual;
 	private Tablero tablero;
 	private String apodo;
+	private String rey;
 	
 	public Jugador(String apodo) {
 		this.apodo = apodo;
@@ -42,6 +43,14 @@ public class Jugador implements Serializable{
 
 	public String getName() {
 		return apodo;
+	}
+
+	public String getRey() {
+		return rey;
+	}
+
+	public void setRey(String rey) {
+		this.rey = rey;
 	}
 
 }
