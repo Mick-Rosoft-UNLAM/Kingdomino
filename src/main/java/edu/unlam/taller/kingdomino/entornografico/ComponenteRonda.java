@@ -19,7 +19,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import main.java.edu.unlam.taller.kingdomino.logica.Ficha;
 import main.java.edu.unlam.taller.kingdomino.logica.Ronda;
+import main.java.edu.unlam.taller.kingdomino.utils.CargadorImg;
 
 public class ComponenteRonda extends JPanel {
 
@@ -30,16 +32,18 @@ public class ComponenteRonda extends JPanel {
 	private JTextField txtFldPosDerCol;
 	private JPanel panel_1; 
 	private JPanel panelRonda;
+	private CargadorImg cargadorImg;
 
-	public ComponenteRonda() {
+	public ComponenteRonda() throws IOException {
 		setBackground(Color.LIGHT_GRAY);
 		setSize(new Dimension(540, 540));
 		setLayout(null);
+		cargadorImg = new CargadorImg();
 	
 		
 		panelRonda = new JPanel();
 		panelRonda.setBackground(Color.LIGHT_GRAY);
-		panelRonda.setBounds(34, 36, 227, 320);
+		panelRonda.setBounds(275, 34, 227, 320);
 		add(panelRonda);
 
 		panel_1 = new JPanel();
@@ -78,22 +82,20 @@ public class ComponenteRonda extends JPanel {
 		JLabel lblIngresarPosicion = new JLabel("Ingresar posici\u00F3n ficha:");
 		lblIngresarPosicion.setBounds(20, 23, 141, 21);
 		panel_1.add(lblIngresarPosicion);
-		
-		JPanel panelRonda_1 = new JPanel();
-		panelRonda_1.setBounds(284, 36, 218, 320);
-		add(panelRonda_1);
 	}
 
 	public void initRonda(Ronda ronda) throws IOException {
-		Image img = ImageIO.read(new File(".//src//img//Bosque.png"));
-		panelRonda.setBounds(34, 36, 86 * 2, (86 * ronda.getCantidadDeJugadores()) + (20 * (ronda.getCantidadDeJugadores() - 1)));
+		panelRonda.setBounds(275, 34, 86 * 2, (86 * ronda.getCantidadDeJugadores()) + (20 * (ronda.getCantidadDeJugadores() - 1)));
 		panelRonda.setLayout(new GridLayout(ronda.getCantidadDeJugadores(), 2, 0, 20));
+		
+		String[] imgFichas = ronda.getFichas().replaceAll("[\\[+\\]+\\ ]", "").split(",");
 		for (int i = 0; i < ronda.getCantidadDeJugadores(); i++) {
+			String[] imgFichasJugador = imgFichas[i].split("_");
 			for (int j = 0; j < 2; j++) {
 				JButton temp = new JButton();
 				temp.setPreferredSize(new Dimension(86, 86));
-				temp.setIcon(new ImageIcon(img));
-				temp.setEnabled(false);
+				temp.setFocusPainted(false);
+				temp.setIcon(new ImageIcon(cargadorImg.getImg(imgFichasJugador[j])));
 				panelRonda.add(temp);
 			}
 		}

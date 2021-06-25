@@ -8,16 +8,14 @@ import java.util.Random;
 
 public enum Bioma implements Serializable{
 	BOSQUE,
-	MONTAÑA,
+	MINA,
 	LAGO,
 	TRIGAL,
+	PASTIZAL,
+	CAMPO,
 	CASTILLO;
 	
-	private int cantCoronas;
-	
-	Bioma() {
-		this.cantCoronas = new Random().nextInt(3);
-	}
+	private Bioma() {}
 	
 	private static final List<Bioma> VALUES =
 		    Collections.unmodifiableList(Arrays.asList(values()));
@@ -28,10 +26,6 @@ public enum Bioma implements Serializable{
 			rand  = VALUES.get(new Random().nextInt(VALUES.size()));
 		} while(rand == Bioma.CASTILLO);
 		return rand;
-	}
-
-	public int getCantCoronas() {
-		return cantCoronas;
 	}
 	
 	@Override

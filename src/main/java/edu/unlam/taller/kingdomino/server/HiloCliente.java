@@ -37,7 +37,6 @@ public class HiloCliente implements Runnable {
 					Object next = objectInputStream.readObject();
 					if (next instanceof String) {
 						String[] data = ((String) next).split("-");
-						System.out.println(data);
 						String dataType = data[0];
 						String message = "";
 						if (data.length > 1) {

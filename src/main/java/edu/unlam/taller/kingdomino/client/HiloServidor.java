@@ -70,6 +70,7 @@ public class HiloServidor implements Runnable {
 	}
 
 	private void manejoMensajeRonda(Object next) throws IOException {
+		System.out.println(((Ronda) next).getFichas());
 		app.iniciarPartida((Ronda) next);
 	}
 

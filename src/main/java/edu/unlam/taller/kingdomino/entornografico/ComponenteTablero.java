@@ -28,27 +28,12 @@ public class ComponenteTablero extends JPanel {
 	}
 
 	public void createButtonPanel() throws IOException {
-		Image img = ImageIO.read(new File(".//src//img//circ.png"));
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				JButton temp = new JButton();
 				temp.setPreferredSize(new Dimension(60, 60));
 				temp.setBackground(new Color(Color.TRANSLUCENT));
 				temp.setText(i + ", " + j);
-				//temp.setIcon(new ImageIcon(img));
-//				temp.addMouseListener(new MouseAdapter() {
-//					@Override
-//					public void mouseEntered(MouseEvent e) {
-//						temp.setIcon(new ImageIcon(imgCircCruz));
-//					}
-//				});
-
-//				temp.addMouseListener(new MouseAdapter() {
-//					@Override
-//					public void mouseExited(MouseEvent e) {
-//						temp.setBackground(new Color(Color.TRANSLUCENT));
-//					}
-//				});
 				add(temp);
 			}
 		}
