@@ -8,6 +8,11 @@ public class Jugador implements Serializable{
 	private static final long serialVersionUID = -8672140927927732000L;
 	private Ficha fichaActual;
 	private Tablero tablero;
+	
+	public Tablero getTablero() {
+		return tablero;
+	}
+
 	private String apodo;
 	private String rey;
 	

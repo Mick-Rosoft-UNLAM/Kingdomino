@@ -8,6 +8,7 @@ public class FichaBioma implements Serializable{
 	
 	private Bioma bioma;
 	private int cantCoronas;
+	private boolean puntoSumado = false;
 	
 	public FichaBioma() {
 		this.setCantCoronas(new Random().nextInt(3));
@@ -47,4 +48,11 @@ public class FichaBioma implements Serializable{
 	public String name() {
 		return bioma.name();
 	}
+	
+	public boolean puntajeYaSumado() {
+        return puntoSumado;
+    }
+    public void setPuntajeSumado(boolean puntoSumado) {
+        this.puntoSumado = puntoSumado;
+    }
 }
