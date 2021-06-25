@@ -38,7 +38,7 @@ public class TestTablero {
 	public void verificarPosicionLibre() {
 		List<Ficha> fichas = p1.getFichasParaTurno();
 		j1.elegirFicha(fichas, 1);
-		//assertEquals(true, j1.getTablero().posicionVacia(new Posicion(5, 4), new Posicion(6, 4)));
+		assertEquals(true, j1.getTablero().posicionVacia(new Posicion(5, 4), new Posicion(6, 4)));
 	}
 	@Test
 	public void verificarCastilloCentro() {
@@ -51,7 +51,16 @@ public class TestTablero {
 		List<Ficha> fichas = p1.getFichasParaTurno();
 		j1.elegirFicha(fichas, 1);
 		j1.colocarFichaPreviaEnTablero(j1.getFichaActual(), new Posicion(5, 4), new Posicion(6, 4));
-		//assertEquals(false, j1.getTablero().posicionVacia(new Posicion(5, 4), new Posicion(6, 4)));
+		assertEquals(false, j1.getTablero().posicionVacia(new Posicion(5, 4), new Posicion(6, 4)));
+	}
+	
+	@Test
+	public void calculoPuntaje() {
+		List<Ficha> fichas = p1.getFichasParaTurno();
+		j1.elegirFicha(fichas, 1);
+		j1.colocarFichaPreviaEnTablero(j1.getFichaActual(), new Posicion(5, 4), new Posicion(6, 4));
+		int puntos = j1.getTablero().sumarPuntos();
+		//System.out.println(puntos);
 	}
 
 }
