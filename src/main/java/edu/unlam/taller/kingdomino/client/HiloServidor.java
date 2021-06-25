@@ -95,6 +95,12 @@ public class HiloServidor implements Runnable {
 		case "PI":
 			app.mostrarMensajePartidaYaIniciada();
 			break;
+		case "RE":
+			app.bloquearReyElegido(mensaje);
+			break;
+		case "RYE":
+			app.mostrarMensajeReyYaElegido();
+			break;
 		}
 	}
 }

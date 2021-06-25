@@ -14,6 +14,8 @@ public class HiloCliente implements Runnable {
 	private Servidor servidor;
 	ObjectInputStream objectInputStream;
 	ObjectOutputStream objectOutputStream;
+	
+	Jugador jugador = new Jugador(null);
 
 	public HiloCliente(Servidor server, Socket socket) {
 		this.servidor = server;
@@ -47,7 +49,8 @@ public class HiloCliente implements Runnable {
 						switch (dataType) {
 						// Agregar Jugador
 						case "AJ": {
-							if (!servidor.agregarJugador(new Jugador(message))) {
+							jugador.setName(message);
+							if (!servidor.agregarJugador(jugador)) {
 								// Partida ya Iniciada
 								mensajeOut = "PI";
 							} else {
@@ -66,9 +69,14 @@ public class HiloCliente implements Runnable {
 							mensajeOut = iniciarPartida();
 							break;
 						}
+						//Elegir Rey
+						case "ER": {
+							mensajeOut = elegirRey(message);
+							break;
+						}
 						}
 
-						if (mensajeOut != "PI") {
+						if (mensajeOut != "PI" && mensajeOut != "RYE") {
 							for (HiloCliente thatClient : servidor.getClients()) {
 								ObjectOutputStream thatClientOut = thatClient.getWriter();
 								if (thatClientOut != null) {
@@ -88,6 +96,17 @@ public class HiloCliente implements Runnable {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private String elegirRey(String message) {
+		if(jugador.getRey() == null) {			
+			jugador.setRey(message);
+			//Rey Elegido
+			return "RE-" + message;
+		} else {
+			//Rey Ya Elegido
+			return "RYE";
 		}
 	}
 

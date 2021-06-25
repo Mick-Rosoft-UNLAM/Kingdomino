@@ -53,7 +53,7 @@ public class Cliente {
 		this.socketConectado = socketConectado;
 	}
 
-	public void elegirRey(String string) {
-
+	public void elegirRey(String rey) {
+		hiloServidor.enviarMensaje("ER-" + rey);
 	}
 }

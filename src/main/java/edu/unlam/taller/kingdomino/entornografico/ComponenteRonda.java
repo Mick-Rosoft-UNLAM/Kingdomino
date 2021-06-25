@@ -80,9 +80,10 @@ public class ComponenteRonda extends JPanel {
 		panel_1.add(lblIngresarPosicion);
 		
 		timer = new Timer(1, event -> {
-			panelRonda.setBounds(panelRonda.getX() - 5, 34, panelRonda.getWidth(), panelRonda.getHeight());
-            if (panelRonda.getX() < 34) {
-                timer.stop();
+            if (panelRonda.getX() > 34) {
+            	panelRonda.setBounds(panelRonda.getX() - 5, 34, panelRonda.getWidth(), panelRonda.getHeight());
+            } else {            	
+            	timer.stop();
             }
         });
         timer.setInitialDelay(0);
@@ -106,7 +107,7 @@ public class ComponenteRonda extends JPanel {
 				JButton temp = new JButton();
 				temp.setPreferredSize(new Dimension(86, 86));
 				temp.setFocusPainted(false);
-				temp.setIcon(new ImageIcon(cargadorImg.getImg(imgFichasJugador[j])));
+				temp.setIcon(cargadorImg.getImg(imgFichasJugador[j]));
 				panelRonda.add(temp);
 			}
 		}

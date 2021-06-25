@@ -50,7 +50,7 @@ public class App {
 		panelContainer.add(ventanaAgregarJugador, "2");
 		ventanaPartida = new VentanaPartida();
 		panelContainer.add(ventanaPartida, "3");
-		ventanaCrearPartida = new VentanaCrearPartida(panelContainer, jugador, cliente);
+		ventanaCrearPartida = new VentanaCrearPartida(panelContainer, cliente);
 		panelContainer.add(ventanaCrearPartida, "4");
 		ventanaUnirse = new VentanaUnirse(panelContainer, jugador);
 		panelContainer.add(ventanaUnirse, "5");
@@ -119,5 +119,13 @@ public class App {
 
 	public void mostrarVentanaCrearPartida() {
 		cardLayout.show(panelContainer, "4");
+	}
+
+	public void bloquearReyElegido(String rey) {
+		ventanaCrearPartida.getBtnRey(rey).setEnabled(false);
+	}
+
+	public void mostrarMensajeReyYaElegido() {
+		JOptionPane.showMessageDialog(null, "Ya elegiste un Rey.");
 	}
 }

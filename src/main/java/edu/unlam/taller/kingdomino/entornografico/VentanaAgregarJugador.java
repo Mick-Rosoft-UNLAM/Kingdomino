@@ -38,10 +38,8 @@ public class VentanaAgregarJugador extends JPanel {
 	JButton btnUnirse;
 	JLabel lblIngresarJugador;
 	JLabel lblImgKD;
-	private CargadorImg cargadorImg;
 
 	public VentanaAgregarJugador(JPanel panelContainer, Jugador jugador, Cliente cliente) throws IOException {
-		cargadorImg = CargadorImg.getInstance();
 		
 		setLayout(null);
 		setSize(500, 303);
@@ -50,37 +48,7 @@ public class VentanaAgregarJugador extends JPanel {
 		add(initTxtFldUsuario());
 		add(initBtnUnirse(jugador, panelContainer));
 		add(initBtnCrearPartida(jugador, panelContainer, cliente));
-		
-		JButton btnReyRojo = new JButton("");
-		btnReyRojo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				cliente.elegirRey("ROJO");
-			}
-		});
-		btnReyRojo.setBounds(337, 251, 25, 25);
-		btnReyRojo.setIcon(new ImageIcon(cargadorImg.getImg("ROJO").getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
-		add(btnReyRojo);
-		
-		JButton btnReyAzul = new JButton("");
-		btnReyAzul.setBounds(371, 251, 25, 25);
-		btnReyAzul.setIcon(new ImageIcon(cargadorImg.getImg("AZUL").getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
-		add(btnReyAzul);
-		
-		JButton btnReyAmarillo = new JButton("");
-		btnReyAmarillo.setBounds(439, 251, 25, 25);
-		btnReyAmarillo.setIcon(new ImageIcon(cargadorImg.getImg("AMARILLO").getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
-		add(btnReyAmarillo);
-		
-		JButton btnReyVerde = new JButton("");
-		btnReyVerde.setBounds(405, 251, 25, 25);
-		btnReyVerde.setIcon(new ImageIcon(cargadorImg.getImg("VERDE").getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
-		add(btnReyVerde);
-		
-		JLabel lblElegirRey = new JLabel("Elegir Rey:");
-		lblElegirRey.setHorizontalAlignment(SwingConstants.CENTER);
-		lblElegirRey.setBounds(347, 229, 110, 14);
-		add(lblElegirRey);
+
 	}
 
 	private JButton initBtnCrearPartida(Jugador jugador, JPanel panelContainer, Cliente cliente) {

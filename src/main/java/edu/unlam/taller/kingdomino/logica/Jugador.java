@@ -12,6 +12,7 @@ public class Jugador implements Serializable{
 	private String rey;
 	
 	public Jugador(String apodo) {
+		this.rey = null;
 		this.apodo = apodo;
 		this.tablero = new Tablero();
 	}
