@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import main.java.edu.unlam.taller.kingdomino.logica.Bioma;
 import main.java.edu.unlam.taller.kingdomino.logica.Ficha;
+import main.java.edu.unlam.taller.kingdomino.logica.FichaBioma;
 import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
 import main.java.edu.unlam.taller.kingdomino.logica.Partida;
 import main.java.edu.unlam.taller.kingdomino.logica.Posicion;
@@ -43,7 +44,7 @@ public class TestTablero {
 	@Test
 	public void verificarCastilloCentro() {
 		Tablero tab = new Tablero();
-		//assertEquals(Bioma.CASTILLO.toString(), tab.obtenerBioma(new Posicion(4, 4), j1.getTablero()));
+		//assertEquals(FichaBioma.name(), tab.obtenerBioma(new Posicion(4, 4), j1.getTablero()));
 	}
 
 	@Test
