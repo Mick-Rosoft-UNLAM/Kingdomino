@@ -103,8 +103,7 @@ public class Tablero implements Serializable {
 	public String obtenerBioma(Posicion pos, Tablero tab) {
 		FichaBioma bioma;
 		bioma = tab.tablero[pos.getX()][pos.getY()];
-		return bioma.toString();
-		 
+		return bioma.name();
 	}
 	
 	List<FichaBioma> areaBioma = new ArrayList<FichaBioma>();
@@ -122,17 +121,14 @@ public class Tablero implements Serializable {
 				tablero[x][y].setPuntajeSumado(true);
 				if ((tablero[x + 1][y] != null && tablero[x + 1][y].name() == tablero[x][y].name()) && (x + 1 != 10) && !tablero[x + 1][y].puntajeYaSumado()) {
 					encontrarZonaAdyacentes(x + 1, y);
-
 				}
 
 				if ((tablero[x - 1][y] != null && tablero[x - 1][y].name() == tablero[x][y].name()) && (x - 1 != -1) && !tablero[x - 1][y].puntajeYaSumado()) {
 					encontrarZonaAdyacentes(x - 1, y);
-
 				}
 
 				if (tablero[x][y + 1] != null && tablero[x][y + 1].name() == tablero[x][y].name() && (y + 1 != 10) && !tablero[x][y + 1].puntajeYaSumado()) {
 					encontrarZonaAdyacentes(x, y + 1);
-
 				}
 
 				if (tablero[x][y - 1] != null && tablero[x][y - 1].name() == tablero[x][y].name() && (y - 1 != -1) && !tablero[x][y - 1].puntajeYaSumado()) {
