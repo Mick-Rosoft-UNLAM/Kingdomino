@@ -15,7 +15,7 @@ public class Tablero implements Serializable {
 	}
 
 	public Tablero() {
-		tablero = new FichaBioma[9][9];
+		tablero = new FichaBioma[10][10];
 		tablero[4][4] = FichaBioma.tablero();
 	}
 	
@@ -23,9 +23,9 @@ public class Tablero implements Serializable {
 		if(posicionValida(ficha, posBiomaIzq, posBiomaDer)) {			
 			tablero[posBiomaIzq.getX()][posBiomaIzq.getY()] = ficha.getBiomaIzq();
 			tablero[posBiomaDer.getX()][posBiomaDer.getY()] = ficha.getBiomaDer();
-			System.out.println("Posición valida.");
+			//System.out.println("Posición valida.");
 		} else {
-			System.out.println("Posición no valida o descarta.");
+			//System.out.println("Posición no valida o descarta.");
 		}
 	}
 
@@ -111,33 +111,33 @@ public class Tablero implements Serializable {
 //	private Ficha chosenBioma;
 
 	public void encontrarZonaAdyacentes(int x, int y) {
-
-		if (!(tablero[x][y].puntajeYaSumado())) {
-			if (tablero[x][y] == null) {
+	
+		if (tablero[x][y] != null)
+		{
+		if ((tablero[x][y].puntajeYaSumado())) {
+			 
 
 			} else {
 				areaBioma.add(tablero[x][y]);
 				tablero[x][y].setPuntajeSumado(true);
-				if ((tablero[x + 1][y].name() == tablero[x][y].name()) && (x + 1 != 10) && !tablero[x + 1][y].puntajeYaSumado()) {
+				if ((tablero[x + 1][y] != null && tablero[x + 1][y].name() == tablero[x][y].name()) && (x + 1 != 10) && !tablero[x + 1][y].puntajeYaSumado()) {
 					encontrarZonaAdyacentes(x + 1, y);
 
 				}
 
-				if ((tablero[x - 1][y].name() == tablero[x][y].name()) && (x - 1 != -1) && !tablero[x - 1][y].puntajeYaSumado()) {
+				if ((tablero[x - 1][y] != null && tablero[x - 1][y].name() == tablero[x][y].name()) && (x - 1 != -1) && !tablero[x - 1][y].puntajeYaSumado()) {
 					encontrarZonaAdyacentes(x - 1, y);
 
 				}
 
-				if (tablero[x][y + 1].name() == tablero[x][y].name() && (y + 1 != 10) && !tablero[x][y + 1].puntajeYaSumado()) {
+				if (tablero[x][y + 1] != null && tablero[x][y + 1].name() == tablero[x][y].name() && (y + 1 != 10) && !tablero[x][y + 1].puntajeYaSumado()) {
 					encontrarZonaAdyacentes(x, y + 1);
 
 				}
 
-				if (tablero[x][y - 1].name() == tablero[x][y].name() && (y - 1 != -1) && !tablero[x][y - 1].puntajeYaSumado()) {
+				if (tablero[x][y - 1] != null && tablero[x][y - 1].name() == tablero[x][y].name() && (y - 1 != -1) && !tablero[x][y - 1].puntajeYaSumado()) {
 					encontrarZonaAdyacentes(x, y - 1);
-
 				}
-
 			}
 
 		}
