@@ -44,7 +44,7 @@ public class TestTablero {
 	@Test
 	public void verificarCastilloCentro() {
 		Tablero tab = new Tablero();
-		//assertEquals(FichaBioma.name(), tab.obtenerBioma(new Posicion(4, 4), j1.getTablero()));
+		assertEquals(Bioma.CASTILLO.toString(), tab.obtenerBioma(new Posicion(4, 4), j1.getTablero()));
 	}
 
 	@Test
