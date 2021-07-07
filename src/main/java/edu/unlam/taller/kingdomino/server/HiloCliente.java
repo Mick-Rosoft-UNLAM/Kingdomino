@@ -7,7 +7,13 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import main.java.edu.unlam.taller.kingdomino.dto.Mensaje;
+import main.java.edu.unlam.taller.kingdomino.dto.MensajeAvanzarRonda;
+import main.java.edu.unlam.taller.kingdomino.dto.MensajeIniciarPartida;
+import main.java.edu.unlam.taller.kingdomino.dto.MensajeNoIniciarPartida;
+import main.java.edu.unlam.taller.kingdomino.dto.MensajeTerminarRonda;
 import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
+import main.java.edu.unlam.taller.kingdomino.logica.Ronda;
 
 public class HiloCliente implements Runnable {
 	private Socket socket;
@@ -34,6 +40,7 @@ public class HiloCliente implements Runnable {
 			ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
 			// Iniciar comunicación
+			Object mensajeOut = null;
 			while (!socket.isClosed()) {
 				if (inputStream.available() > 0) {
 					Object next = objectInputStream.readObject();
@@ -44,7 +51,6 @@ public class HiloCliente implements Runnable {
 						if (data.length > 1) {
 							message = data[1];
 						}
-						Object mensajeOut = "";
 
 						switch (dataType) {
 						// Agregar Jugador
@@ -74,21 +80,24 @@ public class HiloCliente implements Runnable {
 							mensajeOut = elegirRey(message);
 							break;
 						}
+						case "AR": {
+							mensajeOut = avanzarRonda(message);
+							break;
+						}
 						}
 
-						if (mensajeOut != "PI" && mensajeOut != "RYE") {
-							for (HiloCliente thatClient : servidor.getClients()) {
-								ObjectOutputStream thatClientOut = thatClient.getWriter();
-								if (thatClientOut != null) {
-									thatClientOut.writeObject(mensajeOut);
-									thatClientOut.flush();
-								}
-							}
-						} else {
-							ObjectOutputStream thatClientOut = this.getWriter();
+					}
+					if (mensajeOut != "PI" && mensajeOut != "RYE") {
+						for (HiloCliente thatClient : servidor.getClients()) {
+							ObjectOutputStream thatClientOut = thatClient.getWriter();
+							thatClientOut.reset();
 							thatClientOut.writeObject(mensajeOut);
 							thatClientOut.flush();
 						}
+					} else {
+						ObjectOutputStream thatClientOut = this.getWriter();
+						thatClientOut.writeObject(mensajeOut);
+						thatClientOut.flush();
 					}
 				}
 			}
@@ -96,6 +105,14 @@ public class HiloCliente implements Runnable {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private Mensaje avanzarRonda(String message) throws IOException {
+		if(servidor.getPartida().ultimoTurnoRonda()) {
+			return new MensajeTerminarRonda(servidor.getPartida().avanzarRonda(Integer.valueOf(message)), servidor.getPartida().nuevaRonda());
+		} else {			
+			return new MensajeAvanzarRonda(servidor.getPartida().avanzarRonda(Integer.valueOf(message)));		
 		}
 	}
 
@@ -114,7 +131,8 @@ public class HiloCliente implements Runnable {
 		return dataType + "-" + servidor.getJugadores().replaceAll("[\\[+\\]+\\ ]", "");
 	}
 
-	private Object iniciarPartida() {
-		return servidor.getPartida().iniciarPartida();
+	private Mensaje iniciarPartida() {
+		Ronda ronda = servidor.getPartida().iniciarPartida();
+		return ronda != null ? new MensajeIniciarPartida(ronda) : new MensajeNoIniciarPartida("NIP");
 	}
 }

@@ -4,6 +4,10 @@ import java.io.*;
 import java.net.Socket;
 import java.util.LinkedList;
 
+import main.java.edu.unlam.taller.kingdomino.dto.MensajeAvanzarRonda;
+import main.java.edu.unlam.taller.kingdomino.dto.MensajeIniciarPartida;
+import main.java.edu.unlam.taller.kingdomino.dto.MensajeTerminarRonda;
+import main.java.edu.unlam.taller.kingdomino.dto.Mensaje;
 import main.java.edu.unlam.taller.kingdomino.entornografico.App;
 import main.java.edu.unlam.taller.kingdomino.logica.Ronda;
 
@@ -55,6 +59,7 @@ public class HiloServidor implements Runnable {
 			}
 			objectOutPutStream.writeObject(mensajeAEnviar);
 			objectOutPutStream.flush();
+			objectOutPutStream.reset();
 		}
 	}
 
@@ -63,15 +68,20 @@ public class HiloServidor implements Runnable {
 			Object next = objectInputStream.readObject();
 			if (next instanceof String) {
 				manejoMensajeString(next);
-			} else if (next instanceof Ronda) {
-				manejoMensajeRonda(next);
+			} else if (next instanceof Mensaje) {
+				manejoMensajeRonda((Mensaje) next);
 			}
 		}
 	}
 
-	private void manejoMensajeRonda(Object next) throws IOException {
-		System.out.println(((Ronda) next).getFichas());
-		app.iniciarPartida((Ronda) next);
+	private void manejoMensajeRonda(Mensaje next) throws IOException {
+		if(next instanceof MensajeIniciarPartida) {
+			app.iniciarPartida((Ronda) next.getMensaje());			
+		} else if(next instanceof MensajeAvanzarRonda) {
+			app.avanzarRonda((Ronda) next.getMensaje());
+		} else if(next instanceof MensajeTerminarRonda) {
+			app.terminarRonda((MensajeTerminarRonda.TerminarRonda) next.getMensaje());
+		}
 	}
 
 	private void manejoMensajeString(Object next) {

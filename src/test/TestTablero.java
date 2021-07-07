@@ -61,7 +61,6 @@ public class TestTablero {
 		j1.elegirFicha(fichas, 1);
 		j1.colocarFichaPreviaEnTablero(j1.getFichaActual(), new Posicion(5, 4), new Posicion(6, 4));
 		int puntos = j1.getTablero().sumarPuntos();
-		//System.out.println(puntos);
 	}
 
 }

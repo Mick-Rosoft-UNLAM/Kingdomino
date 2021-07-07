@@ -10,19 +10,21 @@ public class Partida {
 	private List<Ficha> mazo;
 	private List<Jugador> jugadores;
 	private boolean primerRonda = true;
+	private Ronda rondaActual; 
 	
 	public Partida() {
 		this.jugadores = new ArrayList<>();
 	}
 	
-	public Object iniciarPartida() {
+	public Ronda iniciarPartida() {
 		if(cantJugadoresOk()) {
 			iniciada = true;
 			generarMazo();
 			ordenarJugadores();
-			return Ronda.nuevaRonda(jugadores, getFichasParaTurno());
+			rondaActual = new Ronda(jugadores, getFichasParaTurno());
+			return rondaActual;
 		} else
-			return "NIP";
+			return null;
 	}
 	
 	public void ordenarJugadores() {
@@ -99,15 +101,28 @@ public class Partida {
 		jugadores.removeIf(jugador -> jugador.getName().equals(nombreJugador));
 	}
 
-	public Ronda nuevaRonda() {
-		return Ronda.nuevaRonda(jugadores, getFichasParaTurno());
-	}
-
 	public boolean isIniciada() {
 		return iniciada;
 	}
 
 	public void setIniciada(boolean iniciada) {
 		this.iniciada = iniciada;
+	}
+
+	public Ronda getRondaActual() {
+		return rondaActual;
+	}
+
+	public Ronda avanzarRonda(int fichaElegida) {
+		return this.rondaActual.avanzarRonda(fichaElegida);
+	}
+
+	public boolean ultimoTurnoRonda() {
+		return this.rondaActual.ultimoTurno();
+	}
+
+	public Ronda nuevaRonda() {			
+		ordenarJugadores();
+		return this.rondaActual = new Ronda(jugadores, getFichasParaTurno());
 	}
 }

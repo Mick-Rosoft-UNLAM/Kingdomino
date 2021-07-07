@@ -35,11 +35,6 @@ public class FichaBioma implements Serializable{
 	public void setCantCoronas(int cantCoronas) {
 		this.cantCoronas = cantCoronas;
 	}
-	
-	@Override
-	public String toString() {
-		return bioma + "-" + cantCoronas;
-	}
 
 	public static FichaBioma tablero() {
 		return new FichaBioma(Bioma.CASTILLO, 0);
@@ -54,5 +49,10 @@ public class FichaBioma implements Serializable{
     }
     public void setPuntajeSumado(boolean puntoSumado) {
         this.puntoSumado = puntoSumado;
+    }
+    
+    @Override
+    public String toString() {
+    	return bioma.name() + "-" + cantCoronas;
     }
 }

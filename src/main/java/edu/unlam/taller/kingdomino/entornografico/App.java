@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.java.edu.unlam.taller.kingdomino.client.Cliente;
+import main.java.edu.unlam.taller.kingdomino.dto.MensajeTerminarRonda.TerminarRonda;
 import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
 import main.java.edu.unlam.taller.kingdomino.logica.Ronda;
 
@@ -33,7 +34,6 @@ public class App {
 	Cliente cliente = new Cliente(this);
 	
 	//Jugador
-	Jugador jugador = new Jugador(null);
 	
 	public App() throws IOException {
 		initFrame();	
@@ -46,13 +46,13 @@ public class App {
 	private void initComponentes() throws IOException {
 		ventanaPrincial = new VentanaPrincipal(cardLayout, panelContainer);
 		panelContainer.add(ventanaPrincial, "1");
-		ventanaAgregarJugador = new VentanaAgregarJugador(panelContainer, jugador, cliente);
+		ventanaAgregarJugador = new VentanaAgregarJugador(panelContainer, cliente);
 		panelContainer.add(ventanaAgregarJugador, "2");
-		ventanaPartida = new VentanaPartida();
+		ventanaPartida = new VentanaPartida(cliente);
 		panelContainer.add(ventanaPartida, "3");
 		ventanaCrearPartida = new VentanaCrearPartida(panelContainer, cliente);
 		panelContainer.add(ventanaCrearPartida, "4");
-		ventanaUnirse = new VentanaUnirse(panelContainer, jugador);
+		ventanaUnirse = new VentanaUnirse(panelContainer, cliente.getJugador());
 		panelContainer.add(ventanaUnirse, "5");
 	}
 
@@ -79,7 +79,7 @@ public class App {
 		    				"Exit Confirmation", JOptionPane.YES_NO_OPTION, 
 		    				JOptionPane.QUESTION_MESSAGE, null, null, null);
 		    		if (confirm == 0) {
-		    			cliente.eliminarJugador(jugador.getName());		        		
+		    			cliente.eliminarJugador(cliente.getJugador().getName());		        		
 		    			System.exit(0);
 		    		}
 		    	} else {		    		
@@ -100,6 +100,7 @@ public class App {
 		cambiarDimensionFrame(new Dimension(1230, 600));
 		cardLayout.show(panelContainer, "3");
 		ventanaPartida.initRonda(ronda);
+		frame.pack();
 	}
 	
 	private void cambiarDimensionFrame(Dimension dimension) {
@@ -118,6 +119,7 @@ public class App {
 	}
 
 	public void mostrarVentanaCrearPartida() {
+		frame.setTitle("Kingdomino - " + cliente.getJugador().getName());
 		cardLayout.show(panelContainer, "4");
 	}
 
@@ -127,5 +129,14 @@ public class App {
 
 	public void mostrarMensajeReyYaElegido() {
 		JOptionPane.showMessageDialog(null, "Ya elegiste un Rey.");
+	}
+
+	public void avanzarRonda(Ronda ronda) {
+		ventanaPartida.avanzarRonda(ronda);
+	}
+
+	public void terminarRonda(TerminarRonda terminarRonda) {
+		ventanaPartida.terminarRonda(terminarRonda);
+		frame.pack();
 	}
 }

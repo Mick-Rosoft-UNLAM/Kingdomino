@@ -58,5 +58,4 @@ public class Jugador implements Serializable{
 	public void setRey(String rey) {
 		this.rey = rey;
 	}
-
 }

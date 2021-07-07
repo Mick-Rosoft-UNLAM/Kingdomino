@@ -59,7 +59,7 @@ public class VentanaCrearPartida extends JPanel {
 	}
 
 	public VentanaCrearPartida(JPanel panelContainer, Cliente cliente) throws IOException {
-		cargadorImg = CargadorImg.getInstance();
+		cargadorImg = new CargadorImg();
 		
 		setLayout(null);
 		setSize(500, 303);
@@ -74,21 +74,21 @@ public class VentanaCrearPartida extends JPanel {
 		btnReyRojo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cliente.elegirRey("ROJO");
+				cliente.elegirRey("RED");
 			}
 		});
 		btnReyRojo.setBounds(337, 251, 25, 25);
-		btnReyRojo.setIcon(new ImageIcon((cargadorImg.getImg("ROJO").getImage()).getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		btnReyRojo.setIcon(new ImageIcon((cargadorImg.getImg("RED").getImage()).getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
 		add(btnReyRojo);
 		
 		btnReyAzul = new JButton("");
 		btnReyAzul.setBounds(371, 251, 25, 25);
 		btnReyAzul.setBorder(new LineBorder(Color.BLUE)); 
-		btnReyAzul.setIcon(new ImageIcon((cargadorImg.getImg("AZUL").getImage()).getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		btnReyAzul.setIcon(new ImageIcon((cargadorImg.getImg("BLUE").getImage()).getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
 		btnReyAzul.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cliente.elegirRey("AZUL");
+				cliente.elegirRey("BLUE");
 			}
 		});
 		add(btnReyAzul);
@@ -96,23 +96,23 @@ public class VentanaCrearPartida extends JPanel {
 		btnReyAmarillo = new JButton("");
 		btnReyAmarillo.setBounds(439, 251, 25, 25);
 		btnReyAmarillo.setBorder(new LineBorder(Color.YELLOW)); 
-		btnReyAmarillo.setIcon(new ImageIcon((cargadorImg.getImg("AMARILLO").getImage()).getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		btnReyAmarillo.setIcon(new ImageIcon((cargadorImg.getImg("YELLOW").getImage()).getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
 		btnReyAmarillo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cliente.elegirRey("AMARILLO");
+				cliente.elegirRey("YELLOW");
 			}
 		});
 		add(btnReyAmarillo);
 		
 		btnReyVerde = new JButton("");
 		btnReyVerde.setBounds(405, 251, 25, 25);
-		btnReyVerde.setIcon(new ImageIcon((cargadorImg.getImg("VERDE").getImage()).getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		btnReyVerde.setIcon(new ImageIcon((cargadorImg.getImg("GREEN").getImage()).getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
 		btnReyVerde.setBorder(new LineBorder(Color.GREEN));
 		btnReyVerde.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cliente.elegirRey("VERDE");
+				cliente.elegirRey("GREEN");
 			}
 		});
 		add(btnReyVerde);
@@ -177,13 +177,13 @@ public class VentanaCrearPartida extends JPanel {
 
 	public JButton getBtnRey(String rey) {
 		switch(rey) {
-		case "ROJO":
+		case "RED":
 			return btnReyRojo;
-		case "VERDE":
+		case "GREEN":
 			return btnReyVerde;
-		case "AMARILLO":
+		case "YELLOW":
 			return btnReyAmarillo;
-		case "AZUL":
+		case "BLUE":
 			return btnReyAzul;
 		default:
 			return null;

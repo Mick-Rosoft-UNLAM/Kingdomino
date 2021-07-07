@@ -39,28 +39,28 @@ public class VentanaAgregarJugador extends JPanel {
 	JLabel lblIngresarJugador;
 	JLabel lblImgKD;
 
-	public VentanaAgregarJugador(JPanel panelContainer, Jugador jugador, Cliente cliente) throws IOException {
+	public VentanaAgregarJugador(JPanel panelContainer, Cliente cliente) throws IOException {
 		
 		setLayout(null);
 		setSize(500, 303);
 		add(initLblIgresarJugador());
 		add(cargarImagenKD());
 		add(initTxtFldUsuario());
-		add(initBtnUnirse(jugador, panelContainer));
-		add(initBtnCrearPartida(jugador, panelContainer, cliente));
+		add(initBtnUnirse(panelContainer, cliente));
+		add(initBtnCrearPartida(panelContainer, cliente));
 
 	}
 
-	private JButton initBtnCrearPartida(Jugador jugador, JPanel panelContainer, Cliente cliente) {
+	private JButton initBtnCrearPartida(JPanel panelContainer, Cliente cliente) {
 		btnCrearPartida = new JButton("Crear/Unirse");
 		btnCrearPartida.setBounds(338, 110, 128, 30);
 		
 		btnCrearPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(nombreDeUsuarioValido()) {
-					jugador.setName(txtFldUsuario.getText());
 					cliente.startClient();
-					cliente.agregarJugador(jugador.getName());					
+					cliente.getJugador().setName(txtFldUsuario.getText());
+					cliente.agregarJugador(cliente.getJugador().getName());					
 				} else {					
 					txtFldUsuario.setBorder(new LineBorder(Color.RED));
 					JOptionPane.showMessageDialog(null, "El nombre de usuario es inválido.");
@@ -71,7 +71,7 @@ public class VentanaAgregarJugador extends JPanel {
 		return btnCrearPartida;
 	}
 
-	private JButton initBtnUnirse(Jugador jugador, JPanel panelContainer) {
+	private JButton initBtnUnirse(JPanel panelContainer, Cliente cliente) {
 		btnUnirse = new JButton("Unirse a Partida");
 		btnUnirse.setBounds(339, 183, 128, 30);
 		btnUnirse.setEnabled(false);
@@ -79,7 +79,7 @@ public class VentanaAgregarJugador extends JPanel {
 		btnUnirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(nombreDeUsuarioValido()) {
-					jugador.setName(txtFldUsuario.getText());
+					cliente.getJugador().setName(txtFldUsuario.getText());
 					((CardLayout) panelContainer.getLayout()).show(panelContainer, "5");;
 				} else {					
 					txtFldUsuario.setBorder(new LineBorder(Color.RED));

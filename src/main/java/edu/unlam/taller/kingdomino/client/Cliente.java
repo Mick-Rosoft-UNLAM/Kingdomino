@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import main.java.edu.unlam.taller.kingdomino.entornografico.App;
+import main.java.edu.unlam.taller.kingdomino.logica.Jugador;
 
 public class Cliente {
 
@@ -13,8 +14,19 @@ public class Cliente {
     private HiloServidor hiloServidor;
     private App app;
     private boolean socketConectado = false;
+    
+	Jugador jugador;
 
-    public Cliente(App app){
+    public Jugador getJugador() {
+		return jugador;
+	}
+
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
+
+	public Cliente(App app){
+    	this.jugador = new Jugador(null);
     	this.app = app;
     }
 
@@ -55,5 +67,9 @@ public class Cliente {
 
 	public void elegirRey(String rey) {
 		hiloServidor.enviarMensaje("ER-" + rey);
+	}
+
+	public void avanzarRonda(int nroFicha) {
+		hiloServidor.enviarMensaje("AR-" + nroFicha);
 	}
 }
